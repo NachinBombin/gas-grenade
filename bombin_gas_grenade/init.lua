@@ -16,30 +16,30 @@ local function ReadSpawnConfig(ply)
     local d = DEFAULTS
 
     local cfg = {
-        MinSize      = IsValid(ply) and ply:GetInfoNum("bombin_gasg_min_size",     d.MinSize      or 0.85) or (d.MinSize      or 0.85),
-        MaxSize      = IsValid(ply) and ply:GetInfoNum("bombin_gasg_max_size",     d.MaxSize      or 1.75) or (d.MaxSize      or 1.75),
-        MinDuration  = IsValid(ply) and ply:GetInfoNum("bombin_gasg_min_duration", d.MinDuration  or 18)   or (d.MinDuration  or 18),
-        MaxDuration  = IsValid(ply) and ply:GetInfoNum("bombin_gasg_max_duration", d.MaxDuration  or 35)   or (d.MaxDuration  or 35),
+        MinSize       = IsValid(ply) and ply:GetInfoNum("bombin_gasg_min_size",     d.MinSize      or 0.85) or (d.MinSize      or 0.85),
+        MaxSize       = IsValid(ply) and ply:GetInfoNum("bombin_gasg_max_size",     d.MaxSize      or 1.75) or (d.MaxSize      or 1.75),
+        MinDuration   = IsValid(ply) and ply:GetInfoNum("bombin_gasg_min_duration", d.MinDuration  or 18)   or (d.MinDuration  or 18),
+        MaxDuration   = IsValid(ply) and ply:GetInfoNum("bombin_gasg_max_duration", d.MaxDuration  or 35)   or (d.MaxDuration  or 35),
 
-        BaseSpread   = IsValid(ply) and ply:GetInfoNum("bombin_gasg_basespread",   d.BaseSpread   or 12)   or (d.BaseSpread   or 12),
-        SpreadSpeed  = IsValid(ply) and ply:GetInfoNum("bombin_gasg_spreadspeed",  d.SpreadSpeed  or 18)   or (d.SpreadSpeed  or 18),
-        Speed        = IsValid(ply) and ply:GetInfoNum("bombin_gasg_speed",        d.Speed        or 20)   or (d.Speed        or 20),
-        StartSize    = IsValid(ply) and ply:GetInfoNum("bombin_gasg_startsize",    d.StartSize    or 16)   or (d.StartSize    or 16),
-        EndSize      = IsValid(ply) and ply:GetInfoNum("bombin_gasg_endsize",      d.EndSize      or 72)   or (d.EndSize      or 72),
-        Rate         = IsValid(ply) and ply:GetInfoNum("bombin_gasg_rate",         d.Rate         or 48)   or (d.Rate         or 48),
-        JetLength    = IsValid(ply) and ply:GetInfoNum("bombin_gasg_jetlength",    d.JetLength    or 180)  or (d.JetLength    or 180),
-        WindAngle    = IsValid(ply) and ply:GetInfoNum("bombin_gasg_windangle",    d.WindAngle    or 0)    or (d.WindAngle    or 0),
-        WindSpeed    = IsValid(ply) and ply:GetInfoNum("bombin_gasg_windspeed",    d.WindSpeed    or 0)    or (d.WindSpeed    or 0),
-        Twist        = IsValid(ply) and ply:GetInfoNum("bombin_gasg_twist",        d.Twist        or 8)    or (d.Twist        or 8),
-        Roll         = IsValid(ply) and ply:GetInfoNum("bombin_gasg_roll",         d.Roll         or 4)    or (d.Roll         or 4),
+        BaseSpread    = IsValid(ply) and ply:GetInfoNum("bombin_gasg_basespread",   d.BaseSpread   or 12)   or (d.BaseSpread   or 12),
+        SpreadSpeed   = IsValid(ply) and ply:GetInfoNum("bombin_gasg_spreadspeed",  d.SpreadSpeed  or 18)   or (d.SpreadSpeed  or 18),
+        Speed         = IsValid(ply) and ply:GetInfoNum("bombin_gasg_speed",        d.Speed        or 20)   or (d.Speed        or 20),
+        StartSize     = IsValid(ply) and ply:GetInfoNum("bombin_gasg_startsize",    d.StartSize    or 16)   or (d.StartSize    or 16),
+        EndSize       = IsValid(ply) and ply:GetInfoNum("bombin_gasg_endsize",      d.EndSize      or 72)   or (d.EndSize      or 72),
+        Rate          = IsValid(ply) and ply:GetInfoNum("bombin_gasg_rate",         d.Rate         or 48)   or (d.Rate         or 48),
+        JetLength     = IsValid(ply) and ply:GetInfoNum("bombin_gasg_jetlength",    d.JetLength    or 180)  or (d.JetLength    or 180),
+        WindAngle     = IsValid(ply) and ply:GetInfoNum("bombin_gasg_windangle",    d.WindAngle    or 0)    or (d.WindAngle    or 0),
+        WindSpeed     = IsValid(ply) and ply:GetInfoNum("bombin_gasg_windspeed",    d.WindSpeed    or 0)    or (d.WindSpeed    or 0),
+        Twist         = IsValid(ply) and ply:GetInfoNum("bombin_gasg_twist",        d.Twist        or 8)    or (d.Twist        or 8),
+        Roll          = IsValid(ply) and ply:GetInfoNum("bombin_gasg_roll",         d.Roll         or 4)    or (d.Roll         or 4),
 
-        RenderAmt    = IsValid(ply) and ply:GetInfoNum("bombin_gasg_renderamt",    d.RenderAmt    or 245)  or (d.RenderAmt    or 245),
-        ColorR       = IsValid(ply) and ply:GetInfoNum("bombin_gasg_colorr",       d.ColorR       or 68)   or (d.ColorR       or 68),
-        ColorG       = IsValid(ply) and ply:GetInfoNum("bombin_gasg_colorg",       d.ColorG       or 68)   or (d.ColorG       or 68),
-        ColorB       = IsValid(ply) and ply:GetInfoNum("bombin_gasg_colorb",       d.ColorB       or 68)   or (d.ColorB       or 68),
+        RenderAmt     = IsValid(ply) and ply:GetInfoNum("bombin_gasg_renderamt",    d.RenderAmt    or 245)  or (d.RenderAmt    or 245),
+        ColorR        = IsValid(ply) and ply:GetInfoNum("bombin_gasg_colorr",       d.ColorR       or 68)   or (d.ColorR       or 68),
+        ColorG        = IsValid(ply) and ply:GetInfoNum("bombin_gasg_colorg",       d.ColorG       or 68)   or (d.ColorG       or 68),
+        ColorB        = IsValid(ply) and ply:GetInfoNum("bombin_gasg_colorb",       d.ColorB       or 68)   or (d.ColorB       or 68),
 
-        SoundVolume  = IsValid(ply) and ply:GetInfoNum("bombin_gasg_soundvolume",  d.SoundVolume  or 0.9)  or (d.SoundVolume  or 0.9),
-        SoundPitch   = IsValid(ply) and ply:GetInfoNum("bombin_gasg_soundpitch",   d.SoundPitch   or 100)  or (d.SoundPitch   or 100),
+        SoundVolume   = IsValid(ply) and ply:GetInfoNum("bombin_gasg_soundvolume",  d.SoundVolume  or 0.9)  or (d.SoundVolume  or 0.9),
+        SoundPitch    = IsValid(ply) and ply:GetInfoNum("bombin_gasg_soundpitch",   d.SoundPitch   or 100)  or (d.SoundPitch   or 100),
 
         SmokeMaterial = d.SmokeMaterial or "particle/particle_smokegrenade",
         SoundPath     = d.SoundPath     or "ambient/gas/steam2.wav"
@@ -108,9 +108,9 @@ function ENT:Initialize()
         phys:Wake()
     end
 
-    self.SpawnConfig  = self.SpawnConfig or ReadSpawnConfig(nil)
-    self.GasStopped   = false
-    self.GasActive    = false
+    self.SpawnConfig = self.SpawnConfig or ReadSpawnConfig(nil)
+    self.GasStopped  = false
+    self.GasActive   = false
 
     self:StartGas()
 end
@@ -124,17 +124,17 @@ function ENT:CreateSmokeStack()
     self:SetGasDuration(gasDuration)
     self:SetGasDieTime(CurTime() + gasDuration)
 
-    -- Approximate how long existing particles will linger after TurnOff.
-    -- JetLength / Speed gives travel time; add a small buffer.
-    local speed = math.max(cfg.Speed, 1)
-    self.GasLingerTime = (cfg.JetLength * gasScale) / speed + 2
+    -- How long particles keep travelling after emission stops:
+    -- smokestack Speed is in units/sec; JetLength is the travel distance.
+    self.GasLingerTime = math.max((cfg.JetLength * gasScale) / math.max(cfg.Speed, 1), 3) + 2
 
     local smoke = ents.Create("env_smokestack")
     if not IsValid(smoke) then return end
 
+    -- Position at the grenade but NO parent - so Remove() on the grenade
+    -- does NOT take the smokestack with it.
     smoke:SetPos(self:GetPos() + Vector(0, 0, 6))
     smoke:SetAngles(Angle(-90, 0, 0))
-    smoke:SetParent(self)
 
     smoke:SetKeyValue("InitialState",  "1")
     smoke:SetKeyValue("BaseSpread",    tostring(math.Round(cfg.BaseSpread   * gasScale)))
@@ -180,34 +180,27 @@ function ENT:StartGas()
     self:NextThink(CurTime() + 0.1)
 end
 
+-- Stops emission and lets existing particles fade naturally.
+-- Safe to call from OnRemove because the smokestack is NOT parented.
 function ENT:StopGas()
     if self.GasStopped then return end
     self.GasStopped = true
     self.GasActive  = false
 
-    -- Fade out sound
     if self.GasSoundPatch then
         self.GasSoundPatch:Stop()
         self.GasSoundPatch = nil
     end
 
     if IsValid(self.GasStack) then
-        local stack = self.GasStack
-        self.GasStack = nil
-
-        -- Detach from the grenade so it survives after self:Remove()
-        stack:SetParent(nil)
-
-        -- Tell the smokestack to stop emitting new particles.
-        -- Existing particles will continue to travel/fade naturally.
-        stack:Fire("TurnOff", "", 0)
-
-        -- Remove the smokestack entity only after all lingering particles
-        -- have had time to travel and fade on their own.
+        local stack      = self.GasStack
         local lingerTime = self.GasLingerTime or 10
-        stack:Remove() -- schedule deferred removal via Fire
-        -- Use a timed fire to self-remove after the linger window
-        stack:Fire("Kill", "", lingerTime)
+        self.GasStack    = nil
+
+        -- Stop new particles; existing ones travel & fade on their own.
+        stack:Fire("TurnOff", "", 0)
+        -- Clean up the entity once all particles have dissipated.
+        SafeRemoveEntityDelayed(stack, lingerTime)
     end
 end
 
@@ -222,13 +215,16 @@ function ENT:Think()
         return
     end
 
+    -- Move the unparented smokestack to follow the grenade while it rolls.
+    if IsValid(self.GasStack) then
+        self.GasStack:SetPos(self:GetPos() + Vector(0, 0, 6))
+    end
+
     if self.GasSoundPatch then
         local volume = self.SpawnConfig.SoundVolume
-
         if timeLeft <= 5 then
             volume = volume * math.Clamp(timeLeft / 5, 0, 1)
         end
-
         self.GasSoundPatch:ChangeVolume(volume, 0.15)
     end
 

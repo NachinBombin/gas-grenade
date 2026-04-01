@@ -2,6 +2,9 @@
     Bombin Gas Grenade - Client Options Panel
 
     Found in: Options -> Bombin Addons -> Gas Grenade
+
+    ConVars use FCVAR_USERINFO (userinfo = true, 4th arg) so the server
+    can read them via player:GetInfoNum(). Settings apply on the next spawn.
 ---------------------------------------------------------------------------]]
 
 if SERVER then return end
@@ -9,34 +12,31 @@ if SERVER then return end
 local ADDON_TITLE    = "Gas Grenade"
 local ADDON_CATEGORY = "Bombin Addons"
 
--- ----------------------------------------------------------------
--- ConVars must use FCVAR_USERINFO (3rd arg = true) so the server
--- can read them via player:GetInfoNum().
--- ----------------------------------------------------------------
-CreateClientConVar("bombin_gasg_min_size",     "0.85",  true, false, nil, 0.10, 10)
-CreateClientConVar("bombin_gasg_max_size",     "1.75",  true, false, nil, 0.10, 10)
-CreateClientConVar("bombin_gasg_min_duration", "18",    true, false, nil, 1,    300)
-CreateClientConVar("bombin_gasg_max_duration", "35",    true, false, nil, 1,    300)
+-- 3rd arg = save to cfg, 4th arg = userinfo (must be true for GetInfoNum to work server-side)
+CreateClientConVar("bombin_gasg_min_size",     "0.85",  true, true)
+CreateClientConVar("bombin_gasg_max_size",     "1.75",  true, true)
+CreateClientConVar("bombin_gasg_min_duration", "18",    true, true)
+CreateClientConVar("bombin_gasg_max_duration", "35",    true, true)
 
-CreateClientConVar("bombin_gasg_basespread",   "12",    true, false, nil, 0,    256)
-CreateClientConVar("bombin_gasg_spreadspeed",  "18",    true, false, nil, 0,    256)
-CreateClientConVar("bombin_gasg_speed",        "20",    true, false, nil, 1,    256)
-CreateClientConVar("bombin_gasg_startsize",    "16",    true, false, nil, 1,    256)
-CreateClientConVar("bombin_gasg_endsize",      "72",    true, false, nil, 1,    512)
-CreateClientConVar("bombin_gasg_rate",         "48",    true, false, nil, 1,    256)
-CreateClientConVar("bombin_gasg_jetlength",    "180",   true, false, nil, 1,    1024)
-CreateClientConVar("bombin_gasg_windangle",    "0",     true, false, nil, -180, 180)
-CreateClientConVar("bombin_gasg_windspeed",    "0",     true, false, nil, 0,    256)
-CreateClientConVar("bombin_gasg_twist",        "8",     true, false, nil, -360, 360)
-CreateClientConVar("bombin_gasg_roll",         "4",     true, false, nil, -360, 360)
+CreateClientConVar("bombin_gasg_basespread",   "12",    true, true)
+CreateClientConVar("bombin_gasg_spreadspeed",  "18",    true, true)
+CreateClientConVar("bombin_gasg_speed",        "20",    true, true)
+CreateClientConVar("bombin_gasg_startsize",    "16",    true, true)
+CreateClientConVar("bombin_gasg_endsize",      "72",    true, true)
+CreateClientConVar("bombin_gasg_rate",         "48",    true, true)
+CreateClientConVar("bombin_gasg_jetlength",    "180",   true, true)
+CreateClientConVar("bombin_gasg_windangle",    "0",     true, true)
+CreateClientConVar("bombin_gasg_windspeed",    "0",     true, true)
+CreateClientConVar("bombin_gasg_twist",        "8",     true, true)
+CreateClientConVar("bombin_gasg_roll",         "4",     true, true)
 
-CreateClientConVar("bombin_gasg_colorr",       "68",    true, false, nil, 0,    255)
-CreateClientConVar("bombin_gasg_colorg",       "68",    true, false, nil, 0,    255)
-CreateClientConVar("bombin_gasg_colorb",       "68",    true, false, nil, 0,    255)
-CreateClientConVar("bombin_gasg_renderamt",    "245",   true, false, nil, 1,    255)
+CreateClientConVar("bombin_gasg_colorr",       "68",    true, true)
+CreateClientConVar("bombin_gasg_colorg",       "68",    true, true)
+CreateClientConVar("bombin_gasg_colorb",       "68",    true, true)
+CreateClientConVar("bombin_gasg_renderamt",    "245",   true, true)
 
-CreateClientConVar("bombin_gasg_soundvolume",  "0.9",   true, false, nil, 0,    1)
-CreateClientConVar("bombin_gasg_soundpitch",   "100",   true, false, nil, 60,   180)
+CreateClientConVar("bombin_gasg_soundvolume",  "0.9",   true, true)
+CreateClientConVar("bombin_gasg_soundpitch",   "100",   true, true)
 
 -- ----------------------------------------------------------------
 -- Category registration
@@ -49,14 +49,11 @@ local function BuildGasGrenadeOptions()
     spawnmenu.AddToolMenuOption("Options", ADDON_CATEGORY, "BombinGasGrenadePanel", ADDON_TITLE, "", "", function(panel)
         panel:ClearControls()
 
-        -- ----------------------------------------------------------------
-        -- Header
-        -- ----------------------------------------------------------------
         panel:Help("BOMBIN GAS GRENADE")
         panel:Help(
-            "Spawns a black HL2 grenade that releases dark grey gas.\n" ..
-            "Each spawn rolls a random gas size and duration between your min/max values.\n" ..
-            "The gas sound lasts for the full emission and fades in the last 5 seconds.\n" ..
+            "Spawns a black HL2 grenade that releases gas.\n" ..
+            "Each spawn rolls random size and duration between your min/max.\n" ..
+            "Gas fades out naturally after the timer ends.\n" ..
             "Settings apply to the NEXT grenade you spawn."
         )
 
@@ -87,7 +84,7 @@ local function BuildGasGrenadeOptions()
         panel:ControlHelp("How quickly the gas widens.")
 
         panel:NumSlider("Speed", "bombin_gasg_speed", 1, 256, 0)
-        panel:ControlHelp("How fast the gas travels.")
+        panel:ControlHelp("How fast the gas travels upward.")
 
         panel:NumSlider("Start Size", "bombin_gasg_startsize", 1, 256, 0)
         panel:ControlHelp("Particle size at the source.")
@@ -127,7 +124,7 @@ local function BuildGasGrenadeOptions()
         panel:ControlHelp("Blue color channel.")
 
         panel:NumSlider("Gas Alpha", "bombin_gasg_renderamt", 1, 255, 0)
-        panel:ControlHelp("Opacity. Higher values are less transparent.")
+        panel:ControlHelp("Opacity. Higher = less transparent.")
 
         -- ----------------------------------------------------------------
         -- Sound
