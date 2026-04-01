@@ -10,32 +10,33 @@ local ADDON_TITLE    = "Gas Grenade"
 local ADDON_CATEGORY = "Bombin Addons"
 
 -- ----------------------------------------------------------------
--- Register all ConVars so the server can read them via GetInfoNum
+-- ConVars must use FCVAR_USERINFO (3rd arg = true) so the server
+-- can read them via player:GetInfoNum().
 -- ----------------------------------------------------------------
-CreateClientConVar("bombin_gasg_min_size",     "0.85",  true, false)
-CreateClientConVar("bombin_gasg_max_size",     "1.75",  true, false)
-CreateClientConVar("bombin_gasg_min_duration", "18",    true, false)
-CreateClientConVar("bombin_gasg_max_duration", "35",    true, false)
+CreateClientConVar("bombin_gasg_min_size",     "0.85",  true, false, nil, 0.10, 10)
+CreateClientConVar("bombin_gasg_max_size",     "1.75",  true, false, nil, 0.10, 10)
+CreateClientConVar("bombin_gasg_min_duration", "18",    true, false, nil, 1,    300)
+CreateClientConVar("bombin_gasg_max_duration", "35",    true, false, nil, 1,    300)
 
-CreateClientConVar("bombin_gasg_basespread",   "12",    true, false)
-CreateClientConVar("bombin_gasg_spreadspeed",  "18",    true, false)
-CreateClientConVar("bombin_gasg_speed",        "20",    true, false)
-CreateClientConVar("bombin_gasg_startsize",    "16",    true, false)
-CreateClientConVar("bombin_gasg_endsize",      "72",    true, false)
-CreateClientConVar("bombin_gasg_rate",         "48",    true, false)
-CreateClientConVar("bombin_gasg_jetlength",    "180",   true, false)
-CreateClientConVar("bombin_gasg_windangle",    "0",     true, false)
-CreateClientConVar("bombin_gasg_windspeed",    "0",     true, false)
-CreateClientConVar("bombin_gasg_twist",        "8",     true, false)
-CreateClientConVar("bombin_gasg_roll",         "4",     true, false)
+CreateClientConVar("bombin_gasg_basespread",   "12",    true, false, nil, 0,    256)
+CreateClientConVar("bombin_gasg_spreadspeed",  "18",    true, false, nil, 0,    256)
+CreateClientConVar("bombin_gasg_speed",        "20",    true, false, nil, 1,    256)
+CreateClientConVar("bombin_gasg_startsize",    "16",    true, false, nil, 1,    256)
+CreateClientConVar("bombin_gasg_endsize",      "72",    true, false, nil, 1,    512)
+CreateClientConVar("bombin_gasg_rate",         "48",    true, false, nil, 1,    256)
+CreateClientConVar("bombin_gasg_jetlength",    "180",   true, false, nil, 1,    1024)
+CreateClientConVar("bombin_gasg_windangle",    "0",     true, false, nil, -180, 180)
+CreateClientConVar("bombin_gasg_windspeed",    "0",     true, false, nil, 0,    256)
+CreateClientConVar("bombin_gasg_twist",        "8",     true, false, nil, -360, 360)
+CreateClientConVar("bombin_gasg_roll",         "4",     true, false, nil, -360, 360)
 
-CreateClientConVar("bombin_gasg_colorr",       "68",    true, false)
-CreateClientConVar("bombin_gasg_colorg",       "68",    true, false)
-CreateClientConVar("bombin_gasg_colorb",       "68",    true, false)
-CreateClientConVar("bombin_gasg_renderamt",    "245",   true, false)
+CreateClientConVar("bombin_gasg_colorr",       "68",    true, false, nil, 0,    255)
+CreateClientConVar("bombin_gasg_colorg",       "68",    true, false, nil, 0,    255)
+CreateClientConVar("bombin_gasg_colorb",       "68",    true, false, nil, 0,    255)
+CreateClientConVar("bombin_gasg_renderamt",    "245",   true, false, nil, 1,    255)
 
-CreateClientConVar("bombin_gasg_soundvolume",  "0.9",   true, false)
-CreateClientConVar("bombin_gasg_soundpitch",   "100",   true, false)
+CreateClientConVar("bombin_gasg_soundvolume",  "0.9",   true, false, nil, 0,    1)
+CreateClientConVar("bombin_gasg_soundpitch",   "100",   true, false, nil, 60,   180)
 
 -- ----------------------------------------------------------------
 -- Category registration
@@ -55,7 +56,8 @@ local function BuildGasGrenadeOptions()
         panel:Help(
             "Spawns a black HL2 grenade that releases dark grey gas.\n" ..
             "Each spawn rolls a random gas size and duration between your min/max values.\n" ..
-            "The gas sound lasts for the full emission and fades in the last 5 seconds."
+            "The gas sound lasts for the full emission and fades in the last 5 seconds.\n" ..
+            "Settings apply to the NEXT grenade you spawn."
         )
 
         -- ----------------------------------------------------------------
